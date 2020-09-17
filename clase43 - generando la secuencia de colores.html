@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Simon Dice</title>
+    <style>
+      body {
+        margin: 0;
+        background: #dedede;
+        display: flex;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .gameboard {
+        height: 100vh;
+        width: 100vh;
+        border-radius: 50%;
+        overflow: hidden;
+        margin: 0 auto;
+        max-height: 60vh;
+        max-width: 60vh;
+      }
+
+      .color {
+        width: 50%;
+        height: 50%;
+        display: inline-block;
+      }
+
+      .left {
+        float: left;
+      }
+
+      .right {
+        float: left;
+      }
+
+      .celeste {
+        background: #22a6b3;
+      }
+
+      .celeste.light {
+        background: #7ed6df;
+      }
+
+      .violeta {
+        background: #be2edd;
+      }
+
+      .violeta.light {
+        background: #e056fd;
+      }
+
+      .naranja {
+        background: #f0932b;
+      }
+
+      .naranja.light {
+        background: #ffbe76;
+      }
+
+      .verde {
+        background: #6ab04c;
+      }
+
+      .verde.light {
+        background: #badc58;
+      }
+
+      .btn-start {
+        width: 400px;
+        height: 100px;
+        background: #ecf0f1;
+        color: #2c3e50;
+        font-size: 2.5rem;
+        position: absolute;
+        top: calc(50% - 50px);
+        left: calc(50% - 200px);
+      }
+
+      .hide {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="gameboard">
+      <div id="celeste" class="color celeste left" data-color="celeste"></div>
+      <div id="violeta" class="color violeta right" data-color="violeta"></div>
+      <div id="naranja" class="color naranja left" data-color="naranja"></div>
+      <div id="verde" class="color verde right" data-color="verde"></div>
+      <button id="btnEmpezar" class="btn-start" onclick="empezarJuego()">Empezar a jugar!</button>
+    </div>
+    <script>
+      const celeste = document.getElementById('celeste')
+      const violeta = document.getElementById('violeta')
+      const naranja = document.getElementById('naranja')
+      const verde = document.getElementById('verde')
+      const btnEmpezar = document.getElementById('btnEmpezar')
+
+      class Juego {
+        constructor() {
+          this.inicializar()
+          this.generarSecuencia()
+        }
+
+        inicializar() {
+          btnEmpezar.classList.add('hide')
+          this.nivel = 1
+          this.colores = {
+            celeste,
+            violeta,
+            naranja,
+            verde
+          }
+        }
+
+        generarSecuencia() {
+          this.secuencia = new Array(10).fill(0).map(n => Math.floor(Math.random() * 4))
+        }
+      }
+
+      function empezarJuego() {
+        window.juego = new Juego()
+      }
+    </script>
+  </body>
+</html>
+
+<!-- ___________________________________________________________________________________ -->
+
+<!-- GENERANDO UNA SECUENCIA DE NUMEROS
+En esta clase lo que hacemos es crear la secuencia aleatoria del juego de la siguiente manera;
+
+
+class Juego {
+    constructor(){
+        this.inicializar()
+        this.generarSecuencia()
+    }
+Vamos a clases y cremos en el contructor “this.generarSecuencia” para llamar la función;
+
+   generarSecuencia(){
+        this.secuencia = new Array(10).fill(0).map(n=> Math.floor(Math.random()*4))
+    }
+Como podemos observar en esta función vamoa a generar la secuencia y lo haremos creando un array, de una manera totalmente nueva cual no habíamos implementado antes, es muy importante aca usar la función “fill” para darle un valor a los arrays porque sino no va a funcionar nuestra función “map” para poder trabajar con los arrays y crear la secuencia, para ellos usamos una arrow function dentro de map, y usaremos el modulo de matemáticas universal de JavaScript y usaremos la función “floor” de este que lo que hará es redondearnos hacia abajo el numero que tengamos, esto lo haremos porque al usar math.random() como lo haremos a continuación, este crea un numero aleatorio entre 0 y 1 y debido a que lo multiplicamos x4 nos dará varios números entre 0 y 4 por lo que los queremos redondeados y para ello usamos esta función.
+
+    inicializar(){
+        btnEmpezar.classList.add('hide')
+        this.nivel = 1
+        this.colores = {
+            celeste,
+            violeta,
+            naranja,
+            verde
+        }
+    }
+
+Por ultimo creamos el atributo “this.nivel = 1” que es para indicar que el usuario iniciara por el nivel 1 , ya que ira avanzando a medida que juegue, y otro de detalle es que agregaremos los colores a un atributo de esta función,(dato curioso de JavaScript es el hecho de que cuando llamamos una variable o constante que su valor sea igual a su nombre, no hace falta escribirlo de la siguiente manera por ejemplo;
+
+this.colores = {
+            celeste:celeste,
+    
+        }
+Ya que hacerlo de esta manera es equivalente;
+
+this.colores = {
+            celeste,
+            violeta,
+            naranja,
+            verde
+        } -->
